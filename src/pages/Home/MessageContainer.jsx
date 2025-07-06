@@ -1,42 +1,3 @@
-// import React from "react";
-// import User from "./User";
-// import Message from "./Message";
-// import { IoIosSend } from "react-icons/io";
-
-// function MessageContainer() {
-//   return (
-//     <div className="h-screen w-full flex flex-col">
-//       {/* Header */}
-//       <div className="p-3 border-b border-b-white/10">
-//         <User />
-//       </div>
-
-//       {/* Message Area */}
-//       <div className="flex-1 overflow-y-auto p-3 custom-scroll">
-//         <Message />
-//       </div>
-
-//       {/* Input Box */}
-//       <div className="w-full px-3 py-2 bg-base-100 border-t border-white/10">
-//         <div className="flex items-center gap-2">
-//           <input
-//             type="text"
-//             placeholder="Type your message..."
-//             className="input input-bordered input-primary w-full"
-//           />
-//           <button className="btn btn-primary min-w-[3.5rem] h-[2.4rem] text-xl px-4 shadow-lg hover:scale-105 transition-transform duration-200">
-//             <IoIosSend />
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default MessageContainer;
-
-
-
 import React from "react";
 import User from "./User";
 import Message from "./Message";
@@ -73,3 +34,40 @@ function MessageContainer() {
 }
 
 export default MessageContainer;
+
+// import React from "react";
+// import User from "./User";
+// import Message from "./Message";
+// import { IoIosSend } from "react-icons/io";
+
+// function MessageContainer() {
+//   return (
+//     <div className="h-screen w-full flex flex-col">
+//       {/* Header */}
+//       <div className="p-3 border-b border-b-white/10">
+//         <User />
+//       </div>
+
+//       {/* Message Area */}
+//       <div className="flex-1 overflow-y-auto p-3 custom-scroll">
+//         <Message />
+//       </div>
+
+//       {/* Input Box */}
+//       <div className="w-full px-3 py-2 bg-base-100 border-t border-white/10">
+//         <div className="flex items-center gap-2">
+//           <input
+//             type="text"
+//             placeholder="Type your message..."
+//             className="input input-bordered input-primary w-full"
+//           />
+//           <button className="btn btn-primary min-w-[3.5rem] h-[2.4rem] text-xl px-4 shadow-lg hover:scale-105 transition-transform duration-200">
+//             <IoIosSend />
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default MessageContainer;

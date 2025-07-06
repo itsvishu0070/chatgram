@@ -1,3 +1,57 @@
+import React from "react";
+import User from "./User";
+import { IoSearch } from "react-icons/io5";
+
+function UserSidebar() {
+  return (
+    <div className="max-w-[20rem] w-full h-screen flex flex-col bg-gradient-to-b from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white shadow-lg border-r border-white/10">
+      {/* Logo */}
+      <h1 className="text-center mt-6 mb-4 text-3xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 drop-shadow-lg">
+        Chatgram
+      </h1>
+
+      {/* Search */}
+      <div className="px-4 pb-4">
+        <label className="flex items-center gap-3 bg-white/10 rounded-full px-4 py-2 backdrop-blur-md focus-within:ring-2 ring-primary transition">
+          <IoSearch className="text-lg text-white/70" />
+          <input
+            type="text"
+            placeholder="Search"
+            className="bg-transparent focus:outline-none w-full text-sm placeholder-white/50 text-white"
+          />
+        </label>
+      </div>
+
+      {/* User List */}
+      <div className="flex-1 overflow-y-auto px-4 space-y-3 custom-scroll">
+        <User />
+        <User />
+        <User />
+      </div>
+
+      {/* Footer */}
+      <div className="flex items-center justify-between p-4 border-t border-white/10 bg-white/5 backdrop-blur-md">
+        <div className="avatar">
+          <div className="w-10 rounded-full border-2 border-purple-400 shadow-lg hover:scale-105 transition-transform duration-200">
+            <img
+              src="https://i.ibb.co/k3wMWWf/avatar2.png"
+              alt="User Avatar"
+              className="object-cover"
+            />
+          </div>
+        </div>
+        <button className="btn btn-sm bg-gradient-to-r from-purple-600 to-pink-500 text-white border-0 shadow-md hover:scale-105 transition-transform duration-200">
+          Logout
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default UserSidebar;
+
+//
+//
 // import React from "react";
 // import User from "./User";
 // import { IoSearch } from "react-icons/io5";
@@ -38,8 +92,6 @@
 // }
 
 // export default UserSidebar;
-
-
 
 // import React from "react";
 // import User from "./User";
@@ -95,7 +147,6 @@
 
 // export default UserSidebar;
 
-
 // import React from "react";
 // import User from "./User";
 // import { IoSearch } from "react-icons/io5";
@@ -147,8 +198,6 @@
 
 // export default UserSidebar;
 
-
-
 // import React from "react";
 // import User from "./User";
 // import { IoSearch } from "react-icons/io5";
@@ -199,55 +248,3 @@
 // }
 
 // export default UserSidebar;
-
-import React from "react";
-import User from "./User";
-import { IoSearch } from "react-icons/io5";
-
-function UserSidebar() {
-  return (
-    <div className="max-w-[20rem] w-full h-screen flex flex-col bg-gradient-to-b from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white shadow-lg border-r border-white/10">
-      {/* Logo */}
-      <h1 className="text-center mt-6 mb-4 text-3xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 drop-shadow-lg">
-        Chatgram
-      </h1>
-
-      {/* Search */}
-      <div className="px-4 pb-4">
-        <label className="flex items-center gap-3 bg-white/10 rounded-full px-4 py-2 backdrop-blur-md focus-within:ring-2 ring-primary transition">
-          <IoSearch className="text-lg text-white/70" />
-          <input
-            type="text"
-            placeholder="Search"
-            className="bg-transparent focus:outline-none w-full text-sm placeholder-white/50 text-white"
-          />
-        </label>
-      </div>
-
-      {/* User List */}
-      <div className="flex-1 overflow-y-auto px-4 space-y-3 custom-scroll">
-        <User />
-        <User />
-        <User />
-      </div>
-
-      {/* Footer */}
-      <div className="flex items-center justify-between p-4 border-t border-white/10 bg-white/5 backdrop-blur-md">
-        <div className="avatar">
-          <div className="w-10 rounded-full border-2 border-purple-400 shadow-lg hover:scale-105 transition-transform duration-200">
-            <img
-              src="https://i.ibb.co/k3wMWWf/avatar2.png"
-              alt="User Avatar"
-              className="object-cover"
-            />
-          </div>
-        </div>
-        <button className="btn btn-sm bg-gradient-to-r from-purple-600 to-pink-500 text-white border-0 shadow-md hover:scale-105 transition-transform duration-200">
-          Logout
-        </button>
-      </div>
-    </div>
-  );
-}
-
-export default UserSidebar;
