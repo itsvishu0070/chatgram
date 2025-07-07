@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoKeySharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUserThunk } from "../../store/slice/user/user.thunk";
 
 const Login = () => {
-     const [logindata, setlogindata] = useState({
-        username: "",
-        password: "",
-      });
-  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.userReducer);
+  const [loginData, setLoginData] = useState({
+    username: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated]);
 
   const handleInputChange = (e) => {
-    setlogindata((prev) => ({
+    setLoginData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
- console.log(logindata)
+
   const handleLogin = async () => {
     const response = await dispatch(loginUserThunk(loginData));
     if (response?.payload?.success) {
@@ -55,13 +62,13 @@ const Login = () => {
         <button onClick={handleLogin} className="btn btn-primary">
           Login
         </button>
+
         <p>
-            don't have an account?
-            <Link to='/signup' className="text-blue-400 underline">
+          Don't have an account? &nbsp;
+          <Link to="/signup" className="text-blue-400 underline">
             Sign Up
-            </Link>
+          </Link>
         </p>
-       
       </div>
     </div>
   );

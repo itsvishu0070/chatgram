@@ -1,36 +1,42 @@
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Homepage from './pages/Home/Homepage.jsx';
-import Login from './pages/Authentication/Login.jsx';
-import Signup from './pages/Authentication/Signup.jsx';
-import Error from './pages/Error.jsx';
-import { store } from './store/store.js';
-import {Provider} from 'react-redux'
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+//import Home from "./pages/home/Home.jsx";
+import Home from "./pages/Home/Home.jsx";
+import Login from "./pages/authentication/Login.jsx";
+import Signup from "./pages/authentication/Signup.jsx";
+import { store } from "./store/store.js";
+import { Provider } from "react-redux";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Homepage />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
-  {
-    path: "/*",
-    element: <Error/>,
+    element: <App />, // 👈 App ke andar Outlet hona chahiye
+    children: [
+      {
+        index: true,
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
+      },
+    ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <App />
     <RouterProvider router={router} />
   </Provider>
 );

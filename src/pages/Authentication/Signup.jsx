@@ -1,28 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoKeySharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUserThunk } from "../../store/slice/user/user.thunk";
+import toast from "react-hot-toast";
 
 const Signup = () => {
-  const [signupdata, setsignupdata] = useState({
-    fullname: "",
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.userReducer);
+  const [signupData, setSignupData] = useState({
+    fullName: "",
     username: "",
     password: "",
-    ConfirmPassword:"",
+    confirmPassword: "",
+    gender: "male",
   });
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated]);
+
   const handleInputChange = (e) => {
-    setsignupdata((prev) => ({
+    setSignupData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-  console.log(signupdata)
 
   const handleSignup = async () => {
-    // const response = await dispatch(SignupUserThunk(SignupData));
-    // if (response?.payload?.success) {
-    //   navigate("/");
-    // }
+    if (signupData.password !== signupData.confirmPassword) {
+      return toast.error("Password and confirm password do not match");
+    }
+    const response = await dispatch(registerUserThunk(signupData));
+    if (response?.payload?.success) {
+      navigate("/");
+    }
   };
 
   return (
@@ -34,7 +48,7 @@ const Signup = () => {
           <FaUser />
           <input
             type="text"
-            name="fullname"
+            name="fullName"
             className="grow"
             placeholder="Full Name"
             onChange={handleInputChange}
@@ -67,18 +81,45 @@ const Signup = () => {
           <IoKeySharp />
           <input
             type="password"
-            name="ConfirmPassword"
+            name="confirmPassword"
             placeholder="Confirm Password"
             className="grow"
             onChange={handleInputChange}
           />
         </label>
 
+        <div className="input input-bordered flex items-center gap-5">
+          <label htmlFor="male" className="flex gap-3 items-center">
+            <input
+              id="male"
+              type="radio"
+              name="gender"
+              value="male"
+              className="radio radio-primary"
+              onChange={handleInputChange}
+            />
+            male
+          </label>
+
+          <label htmlFor="female" className="flex gap-3 items-center">
+            <input
+              id="female"
+              type="radio"
+              name="gender"
+              value="female"
+              className="radio radio-primary"
+              onChange={handleInputChange}
+            />
+            female
+          </label>
+        </div>
+
         <button onClick={handleSignup} className="btn btn-primary">
           Signup
         </button>
+
         <p>
-          already have an account?
+          Already have an account? &nbsp;
           <Link to="/login" className="text-blue-400 underline">
             Login
           </Link>
