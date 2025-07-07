@@ -34,7 +34,7 @@ function UserSidebar() {
         <div className="avatar">
           <div className="w-10 rounded-full border-2 border-purple-400 shadow-lg hover:scale-105 transition-transform duration-200">
             <img
-              src="https://i.ibb.co/k3wMWWf/avatar2.png"
+              src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
               alt="User Avatar"
               className="object-cover"
             />

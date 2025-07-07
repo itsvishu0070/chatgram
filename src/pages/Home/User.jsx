@@ -6,7 +6,7 @@ function User() {
       <div className="relative">
         <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-purple-500 group-hover:ring-pink-500 transition">
           <img
-            src="https://i.ibb.co/k3wMWWf/avatar2.png"
+            src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
             alt="user"
             className="w-full h-full object-cover"
           />

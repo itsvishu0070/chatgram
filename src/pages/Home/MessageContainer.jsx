@@ -12,7 +12,24 @@ function MessageContainer() {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-5 py-6 custom-scroll space-y-8 bg-gradient-to-b from-[#1e1b32] via-[#15131f] to-[#0f0e17]">
+      <div className="flex-1 overflow-y-auto px-5 py-6 custom-scroll mix-blend-lighten bg-gradient-to-b from-[#1e1b32] via-[#15131f] to-[#0f0e17]">
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
         <Message />
       </div>
 

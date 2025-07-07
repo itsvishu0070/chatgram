@@ -8,7 +8,7 @@ function Message() {
       <div className="flex items-end gap-3">
         <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-pink-500 shadow-md hover:scale-110 transition">
           <img
-            src="https://i.ibb.co/kB0cwL4/avatar1.png"
+            src="https://i.ibb.co/k3wMWWf/avatar2.png"
             alt="sender"
             className="w-full h-full object-cover"
           />
