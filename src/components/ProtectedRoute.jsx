@@ -1,18 +1,24 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
-const ProtectedRoute = ({ children }) => {
+
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
+
+const ProtectedRoute = () => {
   const { isAuthenticated, screenLoading } = useSelector(
     (state) => state.userReducer
   );
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!screenLoading && !isAuthenticated) navigate('/login')
-  }, [isAuthenticated, screenLoading]);
+  if (screenLoading) {
+    return (
+      <div className="h-screen flex justify-center items-center text-white text-xl">
+        Loading...
+      </div>
+    );
+  }
 
-  return children;
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

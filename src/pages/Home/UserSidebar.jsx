@@ -6,79 +6,86 @@ import {
   getOtherUsersThunk,
   logoutUserThunk,
 } from "../../store/slice/user/user.thunk";
+import { useNavigate } from "react-router-dom";
 
 const UserSidebar = () => {
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
-  const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
-  // ✅ Safe fallback using || {}
-  const { otherUsers = [], userProfile } = useSelector(
-    (state) => state.userReducer || {}
+  const { otherUsers = [], userProfile = {} } = useSelector(
+    (state) => state.userReducer
   );
+
+  const filteredUsers = searchValue
+    ? otherUsers.filter((user) =>
+        (user?.username + user?.fullName)
+          .toLowerCase()
+          .includes(searchValue.toLowerCase())
+      )
+    : otherUsers;
 
   const handleLogout = async () => {
     await dispatch(logoutUserThunk());
+    navigate("/login");
   };
 
   useEffect(() => {
     dispatch(getOtherUsersThunk());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (!searchValue) {
-      setUsers(otherUsers || []); // ✅ fallback
-    } else {
-      const filtered = (otherUsers || []).filter(
-        (user) =>
-          user.username.toLowerCase().includes(searchValue.toLowerCase()) ||
-          user.fullName.toLowerCase().includes(searchValue.toLowerCase())
-      );
-      setUsers(filtered);
-    }
-  }, [searchValue, otherUsers]);
-
   return (
-    <div className="max-w-[20em] w-full h-screen flex flex-col border-r border-r-white/10">
-      <h1 className="bg-black mx-3 rounded-lg mt-3 px-2 py-1 text-[#7480FF] text-xl font-semibold">
-        GUP SHUP
-      </h1>
-
-      <div className="p-3">
-        <label className="input input-bordered flex items-center gap-2">
-          <input
-            onChange={(e) => setSearchValue(e.target.value)}
-            type="text"
-            className="grow"
-            placeholder="Search"
-          />
-          <IoSearch />
-        </label>
+    <div className="max-w-[22em] w-full h-screen flex flex-col bg-[#0F111A] text-white border-r border-white/10 backdrop-blur-md shadow-lg">
+      {/* Chatgram Header */}
+      <div className="w-full px-4 pt-6 pb-4 border-b border-white/10">
+        <h1 className="text-3xl font-extrabold text-center text-[#7480FF] tracking-wide bg-gradient-to-r from-[#1e1e2d] via-[#0e0e18] to-[#1e1e2d] py-3 rounded-xl shadow-inner shadow-[#7480FF]/30">
+          Chatgram
+        </h1>
       </div>
 
-      <div className="h-full overflow-y-auto px-3 flex flex-col gap-2">
-        {(users || []).length > 0 ? (
-          users.map((userDetails) => (
+      {/* Search */}
+      <div className="px-4 py-3">
+        <div className="relative">
+          <input
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            type="text"
+            placeholder="Search users..."
+            className="w-full bg-[#1C1F2E] text-sm rounded-xl px-4 py-2 pl-10 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7480FF]/50 transition-all"
+          />
+          <IoSearch className="absolute top-2.5 left-3 text-[#7480FF] text-lg" />
+        </div>
+      </div>
+
+      {/* User List */}
+      <div className="flex-1 overflow-y-auto px-4 space-y-2 pb-3 scrollbar-thin scrollbar-thumb-[#7480FF]/30 scrollbar-track-transparent">
+        {filteredUsers.length > 0 ? (
+          filteredUsers.map((userDetails) => (
             <User key={userDetails._id} userDetails={userDetails} />
           ))
         ) : (
-          <p className="text-gray-500 text-center mt-2">No users found</p>
+          <p className="text-center text-gray-500 mt-4">No users found</p>
         )}
       </div>
 
-      <div className="flex items-center justify-between p-3">
-        <div className="flex items-center gap-3">
-          <div className="avatar">
-            <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
-              <img src={userProfile?.avatar} alt="avatar" />
+      {/* Footer */}
+      <div className="px-4 py-4 border-t border-white/10 bg-[#0F111A]/70">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="avatar">
+              <div className="w-10 h-10 rounded-full ring ring-[#7480FF]/60 ring-offset-2 ring-offset-[#0F111A]">
+                <img src={userProfile?.avatar} alt="avatar" />
+              </div>
             </div>
+            <div className="text-sm font-medium">{userProfile?.username}</div>
           </div>
-          <h2>{userProfile?.username}</h2>
+          <button
+            onClick={handleLogout}
+            className="bg-[#7480FF] hover:bg-[#5e6fff] text-white text-sm px-4 py-1.5 rounded-xl transition-all shadow-md"
+          >
+            Logout
+          </button>
         </div>
-
-        <button onClick={handleLogout} className="btn btn-primary btn-sm px-4">
-          Logout
-        </button>
       </div>
     </div>
   );

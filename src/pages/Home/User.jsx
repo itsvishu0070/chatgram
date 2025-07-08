@@ -35,3 +35,4 @@ const User = ({ userDetails }) => {
 };
 
 export default User;
+
