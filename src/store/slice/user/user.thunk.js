@@ -82,7 +82,28 @@ export const getOtherUsersThunk = createAsyncThunk(
     } catch (error) {
       console.error(error);
       const errorOutput = error?.response?.data?.errMessage;
-      toast.error(errorOutput);
+      // toast.error(errorOutput);
+      return rejectWithValue(errorOutput);
+    }
+  }
+);
+
+export const updateProfileThunk = createAsyncThunk(
+  "user/updateProfile",
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.patch(
+        "/user/update-profile",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      const errorOutput = error?.response?.data?.errMessage;
       return rejectWithValue(errorOutput);
     }
   }
